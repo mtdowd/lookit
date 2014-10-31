@@ -1,0 +1,48 @@
+<head>
+  <title>Pusher Test</title>
+    <script src="//js.pusher.com/2.2/pusher.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    Pusher.log = function(message) {
+      if (window.console && window.console.log) {
+        window.console.log(message);
+      }
+    };
+
+    var pusher = new Pusher('b922b9271e3bba9bb80b');
+    var channel = pusher.subscribe('test_channel');
+    channel.bind('my_event', function(data) {
+      console.log("Did you make it?");
+      $("#message-list").append("<p>"+data.message+"</p>");
+      return false;
+    });
+  </script>
+</head>
+
+
+<h1><%= current_user.email %>'s Dashboard</h1>
+
+<h3>User List</h3>
+<ul id="user-list">
+  <% @users.each do |user| %>
+    <li><%= user.email %></li>
+  <% end %>
+</ul>
+
+<h3>Message a Friend</h3>
+<section id="send-message">
+
+  <%= button_to "Send lookit Message", messages_path, remote: true  %>
+
+</section>
+
+
+<h3>Your Messages</h3>
+<section id="message-list">
+
+  <% if @new_message.nil? %>
+
+  <% else %>
+    <%= render partial: "dashboards/message", locals: { new_message: @new_message } %>
+  <% end %>
+
+</section>
