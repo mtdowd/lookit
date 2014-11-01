@@ -31,7 +31,11 @@
 <h3>Message a Friend</h3>
 <section id="send-message">
 
-  <%= button_to "Send lookit Message", messages_path, remote: true  %>
+  <%# <%= button_to "Send lookit Message", messages_path, remote: true  %>
+  <%= form_tag messages_path, remote:true do %>
+    <%= text_field_tag :message %>
+    <%= submit_tag %>
+  <% end %>
 
 </section>
 

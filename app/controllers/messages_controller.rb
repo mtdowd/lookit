@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
     # Pusher['test_channel'].trigger('my_event', {
     #         message: "lookit Linda"
     # })
-    @new_message = "lookit Linda"
+    @new_message = params[:message]
 
     render partial: "dashboards/message", locals: { new_message: @new_message }
   end
